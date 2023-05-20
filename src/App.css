@@ -1,3 +1,63 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+.erro{
+  color: red;
+  text-shadow: 1px 1px 10px rgb(2, 2, 2);
+  font-weight: bolder;
+  font-size: larger;
+  background-color: black;
+  border-radius: 15px;
+  padding: 10px;
+}
+#main-principal{
+  background-color: black;
+  background-image: url("https://images8.alphacoders.com/516/516785.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+}
+.h1_Login{
+  color: white;
+  text-shadow: 1px 1px 5px black;
+}
+.main_login{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding-top: 20%;
+  gap: 15px;
+}
+.labels{
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  gap: 15px
+}
+.inputLogin{
+  border-radius: 15px;
+  height: 30px;
+  width: 300px;
+  text-align: center;
+}
+.butLogin{
+  height: 30px;
+  border-radius: 15px;
+  width: 200px;
+  background-image: url("https://thumbs.dreamstime.com/b/escuro-gramado-verde-do-jardim-limpo-calmo-com-um-recentemente-segado-139546714.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  color: rgb(4, 255, 79);
+  text-shadow: 1px 1px 5px black;
+  font-size: large;
+  font-weight: bolder;
+}
+
 header{
   display: flex;
   align-items: center;
@@ -5,4 +65,71 @@ header{
 }
 .logo{
   width: 70px;
+}
+
+footer{
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  text-align: center;
+  color: chartreuse;
+  text-shadow: 1px 1px 5px black;
+}
+header{
+  background-color: rgba(0, 8, 12, 0.274);
+  color: white;
+  text-shadow: 1px 1px 5px black;
+}
+.logout{
+  background-color: transparent;
+  border-radius: 10px;
+  padding: 10px;
+  color: chartreuse;
+}
+.container_header{
+  display: flex;
+  align-items: center;
+  gap: 90px;
+}
+select{
+  width: 150px;
+  height: 30px;
+  margin-top: 50px;
+  border-radius: 10px;
+}
+.container_select{
+  margin-left: 35vw;
+  display: flex;
+  gap: 15px;
+}
+.conteudoPrincipal{
+  color: white;
+  text-shadow: 1px 1px 5px rgb(0, 0, 0);
+
+}
+@media (max-width: 600px)
+{
+  
+  .h1_Login{
+    text-align: center;
+    padding-top: 150px;
+  }
+  header{
+    background-color: rgba(0, 8, 12, 0.274);
+    color: white;
+    text-shadow: 1px 1px 5px black;
+  }
+  .logout{
+    background-color: transparent;
+    border-radius: 10px;
+    padding: 10px;
+    color: chartreuse;
+  }
+  .container_header{
+    display: flex;
+    align-items: center;
+  }
+  select{
+    width: 97px;
+  }
 }

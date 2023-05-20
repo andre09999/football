@@ -31,7 +31,7 @@ const history = useHistory();
     }).then((res)=> {
       setUser(res.data)
     }).catch((error) => {
-      console.log(error)
+      console.error(error)
     })
   })
 const redicionar = ( () => {
@@ -39,7 +39,7 @@ const redicionar = ( () => {
 })
 
   useEffect(()=>{
-    console.log(user)
+    
     if(user?.results === 1){
       localStorage.setItem('key', code)
       localStorage.setItem('count', JSON.stringify(user.response.account))
@@ -51,16 +51,15 @@ const redicionar = ( () => {
   },[user])
 
   return (
-    <main>
-   <h1>login</h1>
-   <label htmlFor="chave">
-    <p data-testid='msgLogin'>coloque sua chave de segurança</p>
-    <input type="chave" name="chave" data-testid="inputLogin" onChange={({target})=>desabilitado(target)} />
+    <main className='main_login'>
+   <label htmlFor="chave" className='labels'>
+    <h1 data-testid='msgLogin' className='h1_Login'>Coloque sua chave de segurança:</h1>
+    <input type="chave" name="chave" data-testid="inputLogin" className='inputLogin' onChange={({target})=>desabilitado(target)} />
     </label>
-    <button data-testid='entrar' disabled={disable} onClick={()=> {fetchs()} }>Login</button>
+    <button data-testid='entrar' className='butLogin' disabled={disable} onClick={()=> {fetchs()} }>Login</button>
     {msg === false ?
-      <p>Codigo incorreto </p> :
-      <dev/>
+      <p className='erro'>Codigo incorreto </p> :
+      <div/>
       }
       </main>
   );

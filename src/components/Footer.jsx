@@ -2,7 +2,7 @@
 function Footer() {
     return (
       <footer>
-     <h1>Footer</h1>
+     <h1>Desenvolvido por Andre Luis</h1>
         </footer>
     );
   }

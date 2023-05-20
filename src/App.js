@@ -9,7 +9,7 @@ function App() {
   let location = useLocation();
   
   return (
-    <main>
+    <main id='main-principal'>
       {location.pathname === '/Login'?
       <div/>:
       <Header/>
