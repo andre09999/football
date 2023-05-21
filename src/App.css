@@ -86,6 +86,7 @@ header{
   border-radius: 10px;
   padding: 10px;
   color: chartreuse;
+  cursor: pointer;
 }
 .container_header{
   display: flex;
@@ -97,6 +98,7 @@ select{
   height: 30px;
   margin-top: 50px;
   border-radius: 10px;
+  cursor: pointer;
 }
 .container_select{
   display: flex;
@@ -124,6 +126,12 @@ table{
   align-items: center;
   justify-content: space-around;
   gap: 20px;
+}
+
+a{
+  text-decoration: none;
+  color: chartreuse;
+  cursor: pointer;
 }
 
 tr:nth-child(even) {background-color: #f2f2f2;}
