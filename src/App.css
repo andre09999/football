@@ -125,6 +125,8 @@ table{
   justify-content: space-around;
   gap: 20px;
 }
+
+tr:nth-child(even) {background-color: #f2f2f2;}
 @media (max-width: 600px)
 {
   
