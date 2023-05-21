@@ -98,14 +98,31 @@ select{
   border-radius: 10px;
 }
 .container_select{
-  margin-left: 35vw;
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 15px;
 }
 .conteudoPrincipal{
   color: white;
   text-shadow: 1px 1px 5px rgb(0, 0, 0);
 
+}
+
+table{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.escala{
+  text-align: center;
+}
+
+#cabecalho{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
 }
 @media (max-width: 600px)
 {
@@ -148,5 +165,11 @@ select{
     justify-content: center;
     gap: 20px;
     padding-top: 50px;
+  }
+  #cabecalho{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    
   }
 }

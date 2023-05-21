@@ -31,78 +31,89 @@ useEffect(()=> {
     }
   }).then((res)=> {
     SetAno(res.data)
-   
   }).catch((error) => {
     console.error(error)
   })
 },[])
 
   useEffect(()=> {
-    
-    api.get("/countries",{
-      headers: {
-        'x-rapidapi-host': 'v3.football.api-sports.io',
-        'x-rapidapi-key':  code,
-      }
-    }).then((res)=> {
-      SetPaises(res.data)
-    }).catch((error) => {
-      console.log(error.response)
-    })
+    if(ano?.length > 0){
+      api.get("/countries",{
+        headers: {
+          'x-rapidapi-host': 'v3.football.api-sports.io',
+          'x-rapidapi-key':  code,
+        }
+      }).then((res)=> {
+        SetPaises(res.data)
+      }).catch((error) => {
+        console.log(error.response)
+      })
+    }
   },[ano])
 
   useEffect(()=> {
-    api.get(`/leagues?country=${escolhapaises}&season=${escolhaTemporada}`,{
-      headers: {
-        'x-rapidapi-host': 'v3.football.api-sports.io',
-        'x-rapidapi-key':  code,
-
-      }
-    }).then((res)=> {
-      setLiga(res.data)
-    }).catch((error) => {
-      console.log(error.response)
-    })
+    if(paises?.length > 0){
+      api.get(`/leagues?country=${escolhapaises}&season=${escolhaTemporada}`,{
+        headers: {
+          'x-rapidapi-host': 'v3.football.api-sports.io',
+          'x-rapidapi-key':  code,
+  
+        }
+      }).then((res)=> {
+        setLiga(res.data)
+      }).catch((error) => {
+        console.log(error.response)
+      })
+    }
   },[paises])
 
   useEffect(()=> {
-    api.get(`/teams?league=${escolhaliga}&season=${escolhaTemporada}`,{
-      headers: {
-        'x-rapidapi-host': 'v3.football.api-sports.io',
-        'x-rapidapi-key':  code,
-      }
-    }).then((res)=> {
-      setTime(res.data)
-    }).catch((error) => {
-      console.log(error.response)
-    })
+    if(liga?.length > 0){
+      api.get(`/teams?league=${escolhaliga}&season=${escolhaTemporada}`,{
+        headers: {
+          'x-rapidapi-host': 'v3.football.api-sports.io',
+          'x-rapidapi-key':  code,
+        }
+      }).then((res)=> {
+        setTime(res.data)
+      }).catch((error) => {
+        console.log(error.response)
+      })
+    }
   },[liga])
 
   useEffect(()=> {
-    api.get(`/players?team=${time}&league=${escolhaliga}&season=${escolhaTemporada}`,{
-      headers: {
-        'x-rapidapi-host': 'v3.football.api-sports.io',
-        'x-rapidapi-key':  code,
-      }
-    }).then((res)=> {
-      setformação(res.data)
-    }).catch((error) => {
-      console.log(error.response)
-    })
+    if(time?.length > 0){
+      api.get(`/players?team=${time}&league=${escolhaliga}&season=${escolhaTemporada}`,{
+        headers: {
+          'x-rapidapi-host': 'v3.football.api-sports.io',
+          'x-rapidapi-key':  code,
+        }
+      }).then((res)=> {
+        setformação(res.data)
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
+  },[time])
+  useEffect(()=>{
+    if(formação?.length > 0){
 
-    api.get(`/teams/statistics?season=${escolhaTemporada}&team=${escolhatime}&league=${escolhaliga}}`,{
-      headers: {
-        'x-rapidapi-host': 'v3.football.api-sports.io',
-        'x-rapidapi-key':  code,
-      }
-    }).then((res)=> {
-      setestatiticas(res.data)
-      Setminutos(res.data.response.gols.for.minute)
-    }).catch((error) => {
-      console.log(error.response)
-    })
-
+      api.get(`/teams/statistics?season=${escolhaTemporada}&team=${escolhatime}&league=${escolhaliga}}`,{
+        headers: {
+          'x-rapidapi-host': 'v3.football.api-sports.io',
+          'x-rapidapi-key':  code,
+        }
+      }).then((res)=> {
+        setestatiticas(res.data)
+        console.log(res.data.response.gols)
+        Setminutos(res.data.response.gols)
+      }).catch((error) => {
+        console.log(error)
+      })
+    }
   },[formação])
+
   return (
     <main>
        <div className='container_select'>
@@ -116,25 +127,25 @@ useEffect(()=> {
         <select name="pais" id="" onChange={({target})=> Setescolhapaises(target.value)}>
         {
           paises?.response?.map((i,a)=> (
-            <option key={i}>{i}</option>
+            <option key={i.code}>{i}</option>
           ))
         }</select>
          <select name="liga" id="" onChange={({target})=> Setescolhaliga(target.value)}>
         {
           liga?.response?.map((i,a)=> (
-            <option key={i}>{i}</option>
+            <option key={i.code}>{i}</option>
           ))
         }</select>
         <select name="time" id="" onChange={({target})=> Setescolhatime(target.value)}>
         {
           time?.response?.map((i,a)=> (
-            <option key={i}>{i}</option>
+            <option key={i.code}>{i}</option>
           ))
         }
          </select>
          </div>
         <div className='conteudoPrincipal'>
-        <h3>Escalação</h3>
+        <h3 className='escala'>Escalação</h3>
         {
           estatiticas?.response?.map((a,key)=> (
             <div key={a.team.id}>
@@ -151,7 +162,7 @@ useEffect(()=> {
               <p>perdeu: {a.fixtures.loses.total}</p>
               <BarChart width={600} height={300} data={minutos}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey={Object.keys(minutos)} />
+                <XAxis dataKey={minutos} />
                 <YAxis />
                 <Tooltip />
                 <Legend />
@@ -162,20 +173,23 @@ useEffect(()=> {
         }
         <table>
           <thead>
-            <tr>Nome do Jogador</tr>
-            <tr>idade do jogador</tr>
-            <tr>posição</tr>
-            <tr>numero</tr>
-            <tr>foto</tr>
+            <tr id='cabecalho'>
+              <th>Nome do Jogador</th>
+              <th>Idade do jogador</th>
+              <th>Posição</th>
+              <th>Numero</th>
+              <th>Foto</th>
+            </tr>
           </thead>
           <tbody >
           {
-          formação?.response?.map((a)=> (
-            <tr key={a.id} >
+          formação?.response?.map((a,key)=> (
+            <tr key={key} >
             <td>{a.name}</td>
             <td>{a.age}</td>
             <td>{a.position}</td>
             <td>{a.number}</td>
+
             <td> <img src={a.photo} alt={ `foto do jogador ${a.name}` }/></td>
             </tr>
           ))
