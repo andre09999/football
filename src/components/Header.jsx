@@ -20,7 +20,7 @@ function Header() {
      <div className='container_header'>
       <div>
 
-      <h3>User: {account?.firstname} {account?.lastname}</h3>
+      <h3>Usuario: {account?.firstname} {account?.lastname}</h3>
       <h3 className='email'>Email: {account?.email}</h3>
       </div>
      <button onClick={()=> logout()} className='logout'> Logout</button>
