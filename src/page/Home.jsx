@@ -166,22 +166,24 @@ useEffect(()=> {
     }
   },[escolhatime])
   useEffect(()=>{
-    if(formação?.length > 0){
+    if(formação?.response?.length > 0){
 
-      api.get(`/teams/statistics?season=${escolhaTemporada}&team=${escolhatime}&league=${escolhaliga}}`,{
+      api.get(`/teams/statistics?season=${escolhaTemporada}&team=${escolhatime}&league=${escolhaliga}`,{
         headers: {
           'x-rapidapi-host': 'v3.football.api-sports.io',
           'x-rapidapi-key':  code,
         }
       }).then((res)=> {
         setestatiticas(res.data)
-        console.log(res.data.response.gols)
-        Setminutos(res.data.response.gols.for.minute)
-        let golos = Object.assign({}, Object.values(res.data.response.gols.for.minute[0]).map((a,i)=>a.total))
+        Setminutos(res.data.response.goals.for.minute)
+        let golos = Object.assign({}, Object.values(res.data.response.goals.for.minute[0]).map((a,i)=>{
+          if(a.total === null) return 0
+          return a.total
+        }))
 
         Object.keys(golos).forEach((a)=> {
         
-          let newKwy = Object.keys(res.data.response.gols.for.minute[0])[a]
+          let newKwy = Object.keys(res.data.response.goals.for.minute[0])[a]
           setGrafico()
           const ab = { name : golos[newKwy], gols: golos[a] }
           setGrafico(grafico,ab)
@@ -229,45 +231,37 @@ useEffect(()=> {
          </div>
         <div className='conteudoPrincipal'>
         <h3 className='escala'>Escalação</h3>
-        {
-          estatiticas?.response?.map((a,key)=> (
-            <div key={a.team.id}>
-              <p>formações utilizadas foram </p>
-              {a.lineups.map((b=> (
-                <div>
-                  <p>{b.formation}</p>
-                  <p>{b.played}</p>
+  
+         <div className=''>
+              <h2>formações utilizadas foram </h2>
+              { estatiticas?.response?.lineups?.map((b=> (
+                <div className='forma'>
+                  <p>A formação {b.formation} foi jogado </p>
+                  <p> {b.played} partidas</p>
                 </div>
               )))} 
-              <p>jogou :{a.fixtures.played.total} partidas</p>
-              <p>ganhou : {a.fixtures.wins.total}</p>
-              <p>empatou: {a.fixtures.draws.total}</p>
-              <p>perdeu: {a.fixtures.loses.total}</p>
+              <p>jogou total de :{ estatiticas?.response?.fixtures.played.total} partidas</p>
+              <p>ganhou : { estatiticas?.response?.fixtures.wins.total}</p>
+              <p>empatou: { estatiticas?.response?.fixtures.draws.total}</p>
+              <p>perdeu:  { estatiticas?.response?.fixtures.loses.total}</p>
               
             </div>
-          ))
-        }
         
         <table>
           <thead>
             <tr id='cabecalho'>
               <th>Nome do Jogador</th>
               <th>Idade do jogador</th>
-              <th>Posição</th>
-              <th>Numero</th>
               <th>Foto</th>
             </tr>
           </thead>
           <tbody >
           {
-          formação?.response?.map((a,key)=> (
-            <tr key={key} >
-            <td>{a.name}</td>
-            <td>{a.age}</td>
-            <td>{a.position}</td>
-            <td>{a.number}</td>
-
-            <td> <img src={a.photo} alt={ `foto do jogador ${a.name}` }/></td>
+          formação?.response?.map((a)=> (
+            <tr key={a.player.id} >
+            <td>{a.player.name} {a.player.firstname} {a.player.lastname}</td>
+            <td>{a.player.age}</td>
+            <td> <img src={a.player.photo} alt={ `foto do jogador ${a.player.name}` }/></td>
             </tr>
           ))
         }
