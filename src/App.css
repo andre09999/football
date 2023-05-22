@@ -133,11 +133,34 @@ a{
   color: chartreuse;
   cursor: pointer;
 }
-
+.grafico{
+  background-color: #f1ff29;
+  border-radius: 15px;
+  background-image: url('https://camisasechuteiras.com/wp-content/uploads/2018/02/Mercurial-Moments-Ronaldo-Porto_original.gif');
+  background-position: center;
+  background-size: cover;
+}
+.container-grafico-celular{
+  display: none;
+}
+.container-grafico-computador{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 2s;
+}
 tr:nth-child(even) {background-color: #f2f2f2;}
 @media (max-width: 600px)
 {
-  
+  .container-grafico-celular{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 2s;
+  }
+  .container-grafico-computador{
+    display: none;
+  }
   .h1_Login{
     text-align: center;
     padding-top: 150px;
@@ -146,6 +169,16 @@ tr:nth-child(even) {background-color: #f2f2f2;}
     background-color: rgba(0, 8, 12, 0.274);
     color: white;
     text-shadow: 1px 1px 5px black;
+    gap: 35px;
+  }
+  .container_header{
+    display: flex;
+    flex-direction: column;
+    gap: 35px;
+  }
+  
+  .email{
+    display: none;
   }
   .logout{
     background-color: transparent;
@@ -164,6 +197,10 @@ tr:nth-child(even) {background-color: #f2f2f2;}
   }
   select{
     width: 97px;
+    text-align: center;
+  }
+  option{
+    text-align: center;
   }
   footer{
     font-weight: normal;
