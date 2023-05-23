@@ -176,21 +176,17 @@ useEffect(()=> {
       }).then((res)=> {
         setestatiticas(res.data)
         Setminutos(res.data.response.goals.for.minute)
-        let golos = Object.assign({}, Object.values(res.data.response.goals.for.minute[0]).map((a,i)=>{
+        let golos = Object.assign({}, Object.values(res?.data?.response?.goals.for.minute).map((a,i)=>{
           if(a.total === null) return 0
           return a.total
         }))
-
         Object.keys(golos).forEach((a)=> {
-        
-          let newKwy = Object.keys(res.data.response.goals.for.minute[0])[a]
+          let newKwy = Object.keys(res?.data?.response?.goals?.for?.minute)[a]
           setGrafico()
           const ab = { name : golos[newKwy], gols: golos[a] }
           setGrafico(grafico,ab)
           delete golos[a]
-        })
-        console.log(grafico)
-        
+        })        
       }).catch((error) => {
         console.log(error)
       })
@@ -230,20 +226,19 @@ useEffect(()=> {
          </select>
          </div>
         <div className='conteudoPrincipal'>
-        <h3 className='escala'>Escalação</h3>
-  
-         <div className=''>
+       
+         <div className='estatitic'>
               <h2>formações utilizadas foram </h2>
               { estatiticas?.response?.lineups?.map((b=> (
                 <div className='forma'>
-                  <p>A formação {b.formation} foi jogado </p>
-                  <p> {b.played} partidas</p>
+                  <h3>A formação {b.formation} foi jogado </h3>
+                  <h3> {b.played} partidas</h3>
                 </div>
               )))} 
-              <p>jogou total de :{ estatiticas?.response?.fixtures.played.total} partidas</p>
-              <p>ganhou : { estatiticas?.response?.fixtures.wins.total}</p>
-              <p>empatou: { estatiticas?.response?.fixtures.draws.total}</p>
-              <p>perdeu:  { estatiticas?.response?.fixtures.loses.total}</p>
+              <h3>Jogou total de :{ estatiticas?.response?.fixtures.played.total} partidas</h3>
+              <h3>Ganhou : { estatiticas?.response?.fixtures.wins.total}</h3>
+              <h3>Empatou: { estatiticas?.response?.fixtures.draws.total}</h3>
+              <h3>Perdeu:  { estatiticas?.response?.fixtures.loses.total}</h3>
               
             </div>
         

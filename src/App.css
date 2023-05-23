@@ -121,7 +121,9 @@ table{
 .escala{
   text-align: center;
 }
-
+.estatitic{
+  text-align: center;
+}
 #cabecalho{
   display: flex;
   align-items: center;
@@ -151,12 +153,12 @@ a{
   transition: 2s;
 }
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #f2f2f293;
   color: black;
 }
 tr:nth-child(odd) {
   color: #ffffff;
-  background-color: black;
+  background-color: rgba(0, 0, 0, 0.479);
 }
 .forma{
   display: flex;
